@@ -3,3 +3,9 @@
 
 
 python -m pip install --upgrade huggingface_hub
+
+pip install --upgrade pip
+
+hf auth login
+
+hf auth whoami
