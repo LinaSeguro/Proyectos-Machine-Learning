@@ -2,9 +2,10 @@
 name: Ejecutar EA1 - Carga de Datos
 
 on:
-  push:
+  push: 
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
