@@ -1,0 +1,26 @@
+======================================================================
+RESUMEN AUTOMÁTICO DE EJECUCIÓN DE MODELOS DE MACHINE LEARNING
+Fecha de ejecución: 2026-10-23 18:54:20
+======================================================================
+
+1. DATASET Y PREPROCESAMIENTO
+- Dataset: scikit-learn/auto-mpg (Hugging Face)
+- Registros: 398 | Columnas: 10
+- Preprocesamiento: Conversión de '?' a NaN, Imputación por mediana en horsepower,
+  StandardScaler en numéricas y OneHotEncoder en origin. Sin Data Leakage.
+
+2. MODELO DE REGRESIÓN LINEAL (Objetivo: mpg)
+- MAE:  2.2882 mpg
+- RMSE: 2.8877 mpg
+- R²:   0.8449
+
+3. MODELO DE CLASIFICACIÓN (Objetivo: eficiencia_combustible [Baja/Media/Alta])
+- Accuracy:  0.8125
+- Precision: 0.8558
+- Recall:    0.8125
+- F1-Score:  0.8113
+- Matriz de Confusión [Baja, Media, Alta]:
+[[23  6  0]
+ [ 0 31  1]
+ [ 0  8 11]]
+======================================================================
