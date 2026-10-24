@@ -218,8 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-<<<<<<< HEAD
-=======
+
 
 # Entornos virtuales
 .venv/
@@ -239,4 +238,4 @@ __pycache__/
 
 # Caché de Hugging Face
 .cache/
->>>>>>> c3d6f6c1de076a72820286d1752a8aa2777e54d5
+
