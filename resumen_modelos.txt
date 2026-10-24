@@ -1,26 +1,45 @@
 ======================================================================
 RESUMEN AUTOMÁTICO DE EJECUCIÓN DE MODELOS DE MACHINE LEARNING
-Fecha de ejecución: 2026-10-23 18:54:20
+Fecha de ejecución: 2026-10-24 10:01:53
 ======================================================================
 
-1. DATASET Y PREPROCESAMIENTO
-- Dataset: scikit-learn/auto-mpg (Hugging Face)
-- Registros: 398 | Columnas: 10
-- Preprocesamiento: Conversión de '?' a NaN, Imputación por mediana en horsepower,
-  StandardScaler en numéricas y OneHotEncoder en origin. Sin Data Leakage.
+1. IDENTIFICACIÓN DEL DATASET Y PREPROCESAMIENTO
+----------------------------------------------------------------------
+- Dataset ID: scikit-learn/auto-mpg (Hugging Face)
+- Enlace: https://huggingface.co/datasets/scikit-learn/auto-mpg
+- Registros totales: 398 | Columnas: 10
+- Preprocesamiento: Imputación por mediana en 'horsepower', escalado
+  estándar en variables continuas y One-Hot Encoding en 'origin'.
+- Prevención de Data Leakage: Transformaciones ajustadas solo en Train set.
 
-2. MODELO DE REGRESIÓN LINEAL (Objetivo: mpg)
-- MAE:  2.2882 mpg
-- RMSE: 2.8877 mpg
-- R²:   0.8449
+2. MODELO DE REGRESIÓN LINEAL
+----------------------------------------------------------------------
+- Objetivo: Estimar la eficiencia continua de combustible en mpg.
+- Variable Objetivo: mpg
+- Predictoras: cylinders, displacement, horsepower, weight, acceleration, model_year, origin
+- Algoritmo: LinearRegression
+- Métricas:
+  * MAE:  2.2882 mpg
+  * RMSE: 2.8877 mpg
+  * R²:   0.8449
 
-3. MODELO DE CLASIFICACIÓN (Objetivo: eficiencia_combustible [Baja/Media/Alta])
-- Accuracy:  0.8125
-- Precision: 0.8558
-- Recall:    0.8125
-- F1-Score:  0.8113
-- Matriz de Confusión [Baja, Media, Alta]:
+3. MODELO DE CLASIFICACIÓN
+----------------------------------------------------------------------
+- Objetivo: Clasificar categoría de eficiencia (Baja, Media, Alta).
+- Variable Objetivo: eficiencia_combustible (Baja <= 19, Media 19-29, Alta > 29)
+- Predictoras: Mismas variables que regresión (se excluyó 'mpg' por Data Leakage).
+- Algoritmo: RandomForestClassifier (n_estimators=100, max_depth=5)
+- Métricas:
+  * Accuracy:  0.8125
+  * Precision: 0.8558
+  * Recall:    0.8125
+  * F1-Score:  0.8113
+- Matriz de Confusión:
 [[23  6  0]
  [ 0 31  1]
  [ 0  8 11]]
+
+4. CONCLUSIONES
+----------------------------------------------------------------------
+- Ambos modelos responden eficazmente al problema planteado sobre el dataset Auto-MPG.
 ======================================================================
