@@ -3,3 +3,7 @@ pandas
 scikit-learn
 datasets
 pyarrow
+matplotlib
+ipykernel
+nbconvert
+jupyter
