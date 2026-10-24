@@ -8,13 +8,13 @@ Columnas y tipos:
 - millas_por_galon: float64
 - cilindros: int64
 - cilindrada: float64
-- caballos_de_fuerza: object
+- caballos_de_fuerza: str
 - peso: int64
 - aceleracion: float64
 - anio_modelo: int64
 - origen: int64
-- nombre_automovil: object
-- nivel_eficiencia: object
+- nombre_automovil: str
+- nivel_eficiencia: str
 
 Valores nulos por columna:
 - millas_por_galon: 0
