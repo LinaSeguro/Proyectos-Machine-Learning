@@ -218,3 +218,25 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+<<<<<<< HEAD
+=======
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Archivos temporales de Python
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Secretos y variables de entorno
+.env
+.env.*
+
+# Caché de Hugging Face
+.cache/
+>>>>>>> c3d6f6c1de076a72820286d1752a8aa2777e54d5
