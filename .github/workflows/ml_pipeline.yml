@@ -2,9 +2,9 @@ name: Machine Learning Pipeline
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
 
 jobs:
   run-pipeline:
@@ -12,17 +12,17 @@ jobs:
 
     steps:
     - name: Checkout código
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Configurar Python 3.10
-      uses: actions/setup-python@v4
+    - name: Configurar Python 3.11
+      uses: actions/setup-python@v5
       with:
-        python-version: "3.10"
+        python-version: "3.11"
 
     - name: Instalar dependencias
       run: |
         python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install -r requirements.txt
 
     - name: Ejecutar modelos
       run: |
@@ -33,10 +33,3 @@ jobs:
       with:
         name: resumen-modelos-ml
         path: resumen_modelos.txt
-
-
-
-
-
-
-        

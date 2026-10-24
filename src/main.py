@@ -18,28 +18,24 @@ from sklearn.metrics import (
 def run_pipeline():
     print("Iniciando Pipeline de Machine Learning...")
     
-    # 0. Carga automática del dataset desde Hugging Face
+    # Carga del dataset
     dataset_id = "scikit-learn/auto-mpg"
-    print(f"Cargando dataset '{dataset_id}' desde Hugging Face...")
     hf_ds = load_dataset(dataset_id, split="train")
     df = pd.DataFrame(hf_ds)
     
-    # Estandarización de nombres de columnas (elimina espacios y guiones)
+    # Estandarizar columnas
     df.columns = [c.strip().lower().replace(' ', '_').replace('-', '_') for c in df.columns]
-    print("Columnas estandarizadas:", df.columns.tolist())
     
-    # Reemplazar caracteres '?' por NaN y convertir columnas a numéricas
+    # Reemplazar '?' por NaN y convertir a numericas
     df = df.replace('?', np.nan)
     num_cols = ['cylinders', 'displacement', 'horsepower', 'weight', 'acceleration', 'model_year', 'mpg']
     for col in num_cols:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='coerce')
             
-    # Definición de listas de variables
     num_features = ['cylinders', 'displacement', 'horsepower', 'weight', 'acceleration', 'model_year']
     cat_features = ['origin']
     
-    # Preprocesador con imputación por mediana y escalado estándar
     num_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='median')),
         ('scaler', StandardScaler())
@@ -50,7 +46,7 @@ def run_pipeline():
         ('cat', OneHotEncoder(handle_unknown='ignore', drop='first'), cat_features)
     ])
     
-    # 1. Modelo de Regresión Lineal
+    # 1. Regresion Lineal
     cols_to_drop_reg = [c for c in ['mpg', 'car_name'] if c in df.columns]
     X_reg = df.drop(columns=cols_to_drop_reg)
     y_reg = df['mpg']
@@ -68,7 +64,7 @@ def run_pipeline():
     rmse_r = np.sqrt(mean_squared_error(y_te_r, y_pred_r))
     r2_r = r2_score(y_te_r, y_pred_r)
     
-    # 2. Modelo de Clasificación
+    # 2. Clasificacion
     def categorizar(v):
         if v <= 19.0: return 'Baja'
         elif v <= 29.0: return 'Media'
@@ -95,7 +91,7 @@ def run_pipeline():
     f1_c = f1_score(y_te_c, y_pred_c, average='weighted')
     cm_c = confusion_matrix(y_te_c, y_pred_c, labels=['Baja', 'Media', 'Alta'])
     
-    # 3. Generar archivo de resumen .txt
+    # 3. Guardar .txt
     now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     txt_content = f"""======================================================================
 RESUMEN AUTOMÁTICO DE EJECUCIÓN DE MODELOS DE MACHINE LEARNING
@@ -125,7 +121,7 @@ Fecha de ejecución: {now_str}
     with open("resumen_modelos.txt", "w", encoding="utf-8") as f:
         f.write(txt_content)
         
-    print("\n¡Pipeline ejecutado exitosamente! Se generó el archivo 'resumen_modelos.txt'.")
+    print("\n¡Pipeline ejecutado exitosamente! Se generó 'resumen_modelos.txt'.")
 
 if __name__ == "__main__":
     run_pipeline()
